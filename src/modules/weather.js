@@ -1,4 +1,4 @@
-async function getWeather(location) {
+async function getWeather(location = "bialystok") {
 	const currentWeather = await fetch(
 		`https://api.weatherapi.com/v1/current.json?key=cfec2b650265458d832172312241006&q=${location}`,
 		{
@@ -8,6 +8,7 @@ async function getWeather(location) {
 	const response = await currentWeather.json();
 	console.log(response);
 	return {
+		location: getLocation(response),
 		tempC: getTemp(response),
 		conditionText: getConditionText(response),
 		conditionIcon: getConditionIcon(response),
@@ -30,5 +31,8 @@ function getWindSpeed(response) {
 }
 function getWindDir(response) {
 	return response.current.wind_dir;
+}
+function getLocation(response) {
+	return response.location.name;
 }
 export { getWeather };

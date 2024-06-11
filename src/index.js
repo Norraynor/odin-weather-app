@@ -1,14 +1,16 @@
 import "./style.css";
 import { getTemp, getWeather } from "./modules/weather";
+import { drawCard } from "./modules/weatherDOM";
 
-function component() {
+(async function component() {
 	const element = document.createElement("div");
-	let weather = getWeather("bialystok");
-	console.log(weather);
-	const text = document.createElement("h1");
-	text.textContent = "weather app";
-	element.appendChild(text);
-	return element;
-}
+	const locationInput = document.createElement("input");
+	let currWeather = await getWeather("bialystok").then((weather) => {
+		console.log(weather);
+		element.appendChild(drawCard(weather));
+	});
 
-document.body.appendChild(component());
+	return element;
+})().then((component) => {
+	document.body.appendChild(component);
+});
