@@ -30,3 +30,9 @@ body {
 	gap: 16px;
 	font-size: 0.8rem;
 }
+
+form {
+	margin: auto;
+	width: 40vw;
+	padding-top: 16px;
+}
